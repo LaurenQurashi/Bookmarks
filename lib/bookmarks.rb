@@ -3,7 +3,11 @@ require 'pg'
 class Bookmark
 
   def self.all
-    connection = PG::Connection.open(:dbname => 'bookmark_manager')
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG::Connection.open(:dbname => 'bookmark_manager_test')
+    else
+      connection = PG::Connection.open(:dbname => 'bookmark_manager')
+    end
     results = connection.exec_params('SELECT * FROM bookmarks')
 
     results.map do |row|
@@ -12,9 +16,4 @@ class Bookmark
 
     end
 
-    # [
-    #   "http://www.makersacademy.com",
-    #   "http://www.destroyallsoftware.com",
-    #   "http://www.google.com"
-    #  ]
 end
