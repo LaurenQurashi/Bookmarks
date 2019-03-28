@@ -9,17 +9,18 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/bookmarks' do
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.all # this is saving the data returned by the all method on our bookmark class.
+    # this allows us to use the data in the erb.
     erb :bookmarks
   end
 
   get'/bookmarks/create' do
     erb :create
   end
-  # this is getting our create page that has the form on it.
+  # this is setting our route and getting our create page that has the form on it.
 
   post '/bookmarks' do
-    Bookmark.create(params[:url])
+    Bookmark.create(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
   # this is giving the server our parameters (that were given to the url in

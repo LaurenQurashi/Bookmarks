@@ -21,5 +21,5 @@ RSpec.configure do |config|
   config.before(:each) do
     setup_test_database
   end
-# This calls our method before each test in our sort of spec helper file.
+# This calls our method in our setup_test_database file before each test in our sort of spec helper file.
 end
